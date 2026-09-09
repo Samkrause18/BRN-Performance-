@@ -76,6 +76,131 @@
   .card h3{font-size:31px;letter-spacing:-.04em;margin:0 0 10px}
   .card p{color:#aaa79f;font-size:14px;max-width:290px;margin:0}
   .time{font-size:54px;font-weight:900;letter-spacing:-.07em;color:var(--lime)}
+  
+  /* GALLERY & ATHLETE PROOF STYLES */
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+  .gallery-item {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    text-decoration: none;
+    display: block;
+    cursor: pointer;
+    background: #111;
+  }
+  .gallery-item img {
+    width: 100%;
+    height: 420px;
+    object-fit: cover;
+    display: block;
+    filter: grayscale(100%) contrast(120%);
+    transition: filter 0.3s ease, transform 0.3s ease;
+  }
+  .gallery-item:hover img {
+    filter: grayscale(0%) contrast(100%);
+    transform: scale(1.03);
+  }
+  .gallery-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 20px;
+    background: linear-gradient(0deg, rgba(11,11,11,0.95) 0%, rgba(11,11,11,0) 100%);
+    color: var(--bone);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .gallery-caption span.cta-text {
+    color: var(--lime);
+  }
+
+  /* WORKOUT MODALS */
+  .modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(11, 11, 11, 0.95);
+    backdrop-filter: blur(8px);
+    z-index: 2000;
+    overflow-y: auto;
+    padding: 40px 20px;
+  }
+  .modal:target {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .modal-content {
+    background-color: var(--black);
+    border: 1px solid var(--lime);
+    width: 100%;
+    max-width: 850px;
+    padding: 40px;
+    position: relative;
+  }
+  .close-btn {
+    position: absolute;
+    top: 20px;
+    right: 24px;
+    color: var(--bone);
+    text-decoration: none;
+    font-size: 28px;
+    font-weight: 900;
+  }
+  .close-btn:hover { color: var(--lime); }
+  .modal-header {
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 16px;
+    margin-bottom: 24px;
+  }
+  .modal-header h3 {
+    font-size: 28px;
+    color: var(--lime);
+    margin: 0;
+    font-weight: 900;
+    letter-spacing: -.04em;
+  }
+  .modal-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+  }
+  .modal-body img {
+    width: 100%;
+    height: 100%;
+    min-height: 280px;
+    object-fit: cover;
+    border: 1px solid var(--line);
+  }
+  .workout-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .workout-list li {
+    padding: 12px 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    display: flex;
+    justify-content: space-between;
+  }
+  .workout-list li span { color: var(--lime); }
+
   .program{
     display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--line);
   }
@@ -109,7 +234,7 @@
   .footer-meta{font-size:10px;color:#777;text-transform:uppercase;letter-spacing:.14em;text-align:right}
   @media(max-width:800px){
     .navlinks{display:none}
-    .hero-grid,.program{grid-template-columns:1fr}
+    .hero-grid,.program,.gallery-grid,.modal-body{grid-template-columns:1fr}
     .hero{padding-top:130px}
     .hero-copy{margin-top:35px}
     .cards{grid-template-columns:1fr}
@@ -129,6 +254,7 @@
     <div class="navlinks">
       <a href="#method">Method</a>
       <a href="#programs">Programs</a>
+      <a href="#proof">Proof</a>
       <a href="#culture">Culture</a>
       <a href="#start">Start</a>
     </div>
@@ -187,11 +313,44 @@
   </div>
 </section>
 
+<!-- ATHLETE PROOF & WORKOUT GALLERY SECTION -->
+<section class="section" id="proof">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="kicker">03 / FLASH GRAIN</div>
+      <h2>ATHLETIC<br>PROOF.</h2>
+    </div>
+    <div class="gallery-grid">
+      <a href="#workout-038" class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&w=800&q=80" alt="Heavy Barbell Training">
+        <div class="gallery-caption">
+          <span>BRN 038 / HEAVY BARBELL</span>
+          <span class="cta-text">VIEW WORKOUT →</span>
+        </div>
+      </a>
+      <a href="#workout-027" class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?auto=format&fit=crop&w=800&q=80" alt="Dumbbell Hang Cleans">
+        <div class="gallery-caption">
+          <span>BRN 027 / DB HANG CLEANS</span>
+          <span class="cta-text">VIEW WORKOUT →</span>
+        </div>
+      </a>
+      <a href="#workout-039" class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1534367507873-d2d7e24c797f?auto=format&fit=crop&w=800&q=80" alt="Engine and Output Training">
+        <div class="gallery-caption">
+          <span>BRN 039 / ENGINE & OUTPUT</span>
+          <span class="cta-text">VIEW WORKOUT →</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
 <section class="section">
   <div class="wrap">
     <div class="program">
       <div class="program-info">
-        <div class="kicker">03 / A look inside</div>
+        <div class="kicker">04 / A look inside</div>
         <h2 style="margin-top:28px">BUILT LIKE<br>TRAINING.<br>NOT CONTENT.</h2>
         <p style="color:#aaa79f;max-width:420px;margin-top:28px">Every session has an intent, a time target and a clear reason to exist. No filler. No two-hour splits. No influencer noise.</p>
         <div style="margin-top:24px">
@@ -219,7 +378,7 @@
 <section class="section" id="culture">
   <div class="wrap">
     <div class="section-head">
-      <div class="kicker">04 / Culture</div>
+      <div class="kicker">05 / Culture</div>
       <h2>ATHLETE FIRST.<br>COLLEGE LIFE<br>INCLUDED.</h2>
     </div>
     <div class="culture">
@@ -233,7 +392,7 @@
 
 <section class="section" id="start">
   <div class="wrap" style="text-align:center">
-    <div class="kicker">05 / Start</div>
+    <div class="kicker">06 / Start</div>
     <h2 style="margin:25px auto 35px;max-width:900px">TRAIN LIKE AN ATHLETE.<br>LIVE LIKE A STUDENT.</h2>
     <a class="cta" href="mailto:hello@brn.training">Join BRN. <span>→</span></a>
     <p class="micro">Programs delivered through TrainHeroic / Launching 2026</p>
@@ -249,6 +408,75 @@
     <div class="footer-meta">Performance Programming<br>Est. 2026<br><br>Train hard. Live more.</div>
   </div>
 </footer>
+
+<!-- WORKOUT INTERACTIVE MODALS -->
+<div id="workout-038" class="modal">
+  <div class="modal-content">
+    <a href="#proof" class="close-btn">&times;</a>
+    <div class="modal-header">
+      <h3>BRN 038 / UPPER & STRENGTH</h3>
+      <p style="color: #777; margin-top: 0.5rem; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;">ESTIMATED TIME: 27 MIN</p>
+    </div>
+    <div class="modal-body">
+      <img src="https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&w=800&q=80" alt="Heavy Barbell Training">
+      <div>
+        <ul class="workout-list">
+          <li>05 ROUNDS <span>STRENGTH</span></li>
+          <li>08 BARBELL BENCH PRESS <span>75% 1RM</span></li>
+          <li>10 STRICT PULL-UPS <span>BODYWEIGHT</span></li>
+          <li>12 DB OVERHEAD PRESS <span>HEAVY</span></li>
+          <li>200M RUN <span>PACE</span></li>
+        </ul>
+        <a href="#start" class="cta" style="margin-top: 24px; width: 100%; justify-content: center;">START SESSION <span>→</span></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="workout-027" class="modal">
+  <div class="modal-content">
+    <a href="#proof" class="close-btn">&times;</a>
+    <div class="modal-header">
+      <h3>BRN 027 / CONDITIONING</h3>
+      <p style="color: #777; margin-top: 0.5rem; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;">ESTIMATED TIME: 24 MIN</p>
+    </div>
+    <div class="modal-body">
+      <img src="https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?auto=format&fit=crop&w=800&q=80" alt="Dumbbell Hang Cleans">
+      <div>
+        <ul class="workout-list">
+          <li>04 ROUNDS <span>FOR TIME</span></li>
+          <li>12 DB FRONT SQUATS <span>50 LBS</span></li>
+          <li>10 BURPEES <span>RAW</span></li>
+          <li>08 DB HANG CLEANS <span>50 LBS</span></li>
+          <li>200M RUN <span>SPRINT</span></li>
+        </ul>
+        <a href="#start" class="cta" style="margin-top: 24px; width: 100%; justify-content: center;">START SESSION <span>→</span></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="workout-039" class="modal">
+  <div class="modal-content">
+    <a href="#proof" class="close-btn">&times;</a>
+    <div class="modal-header">
+      <h3>BRN 039 / FULL & FAST</h3>
+      <p style="color: #777; margin-top: 0.5rem; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;">ESTIMATED TIME: 21 MIN</p>
+    </div>
+    <div class="modal-body">
+      <img src="https://images.unsplash.com/photo-1534367507873-d2d7e24c797f?auto=format&fit=crop&w=800&q=80" alt="Engine and Output Training">
+      <div>
+        <ul class="workout-list">
+          <li>AMRAP 15 MIN <span>ENGINE</span></li>
+          <li>15 CAL ROW / BIKE <span>MAX EFFORT</span></li>
+          <li>12 KETTLEBELL SWINGS <span>24 KG</span></li>
+          <li>09 BOX JUMPS <span>24 INCH</span></li>
+        </ul>
+        <a href="#start" class="cta" style="margin-top: 24px; width: 100%; justify-content: center;">START SESSION <span>→</span></a>
+      </div>
+    </div>
+  </div>
+</div>
 
 </body>
 </html>
