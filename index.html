@@ -37,14 +37,18 @@
   .logo span{color:var(--lime)}
   .navlinks{display:flex;gap:28px;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.12em}
   .navlinks a{opacity:.75}.navlinks a:hover{opacity:1}
+
+  /* HERO WITH SWAPPED CARDIO/ECHO BIKE BACKGROUND */
   .hero{
+    position: relative;
     min-height:100vh;display:flex;align-items:flex-end;
     padding:150px 0 72px;
     background:
-      radial-gradient(circle at 80% 25%,rgba(216,255,62,.08),transparent 28%),
-      linear-gradient(180deg,#0b0b0b 0%,#0b0b0b 65%,#101010 100%);
+      linear-gradient(180deg, rgba(11,11,11,0.65) 0%, rgba(11,11,11,0.85) 60%, #0b0b0b 100%),
+      radial-gradient(circle at 80% 25%,rgba(216,255,62,.15),transparent 40%),
+      url('https://images.unsplash.com/photo-1538805060514-97d9cc17730c?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
   }
-  .hero-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:60px;align-items:end;width:100%}
+  .hero-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:60px;align-items:end;width:100%;position:relative;z-index:2;}
   .eyebrow{font-size:12px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--lime);margin-bottom:20px}
   h1{
     font-size:clamp(64px,11vw,150px);line-height:.83;
@@ -60,18 +64,29 @@
   }
   .cta:hover{transform:translateY(-2px)}
   .micro{margin-top:18px;font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:#777}
-  .section{padding:120px 0;border-top:1px solid var(--line)}
-  .section-head{display:flex;justify-content:space-between;gap:30px;align-items:start;margin-bottom:60px}
+  
+  .section{padding:120px 0;border-top:1px solid var(--line); position: relative;}
+  .section-head{display:flex;justify-content:space-between;gap:30px;align-items:start;margin-bottom:60px; position: relative; z-index: 2;}
   .kicker{font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--lime)}
   h2{font-size:clamp(42px,6vw,78px);line-height:.92;letter-spacing:-.055em;margin:0;font-weight:900;max-width:760px}
   .statement{font-size:clamp(20px,2.5vw,31px);max-width:620px;color:#d7d4cc}
-  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+
+  /* METHOD SECTION BACKGROUND */
+  #method {
+    background: 
+      linear-gradient(90deg, rgba(11,11,11,0.95) 0%, rgba(11,11,11,0.7) 50%, rgba(11,11,11,0.95) 100%),
+      url('https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?auto=format&fit=crop&w=1920&q=80') center/cover fixed;
+  }
+
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px; position: relative; z-index: 2;}
   .card{
     border:1px solid var(--line);padding:30px;min-height:310px;
     display:flex;flex-direction:column;justify-content:space-between;
     transition:.2s background,.2s transform;
+    background: rgba(11,11,11,0.85);
+    backdrop-filter: blur(5px);
   }
-  .card:hover{background:#121212;transform:translateY(-3px)}
+  .card:hover{background:rgba(18,18,18,0.95);transform:translateY(-3px)}
   .number{font-size:11px;font-weight:800;color:#777;letter-spacing:.12em}
   .card h3{font-size:31px;letter-spacing:-.04em;margin:0 0 10px}
   .card p{color:#aaa79f;font-size:14px;max-width:290px;margin:0}
@@ -202,7 +217,7 @@
   .workout-list li span { color: var(--lime); }
 
   .program{
-    display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--line);
+    display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--line); background: var(--black);
   }
   .program-info{padding:48px;border-right:1px solid var(--line)}
   .program-list{padding:0}
@@ -213,9 +228,50 @@
   .row:last-child{border-bottom:0}
   .row strong{font-size:14px}.row span{font-size:12px;color:#777;text-align:right}
   .tag{display:inline-block;border:1px solid #454545;padding:7px 9px;font-size:9px;letter-spacing:.13em;text-transform:uppercase;margin:4px 4px 0 0}
+  
+  /* CULTURE GRID */
   .culture{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
-  .culture div{aspect-ratio:1/1;border:1px solid var(--line);padding:20px;display:flex;align-items:flex-end;background:linear-gradient(135deg,#111,#171717)}
-  .culture strong{font-size:18px;letter-spacing:-.03em}
+  .culture-card {
+    position: relative;
+    aspect-ratio: 1/1;
+    border: 1px solid var(--line);
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+    padding: 20px;
+    background: #111;
+  }
+  .culture-card img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(100%) brightness(0.65) contrast(110%);
+    transition: filter 0.3s ease, transform 0.3s ease;
+    z-index: 1;
+  }
+  .culture-card:hover img {
+    filter: grayscale(0%) brightness(0.8) contrast(100%);
+    transform: scale(1.05);
+  }
+  .culture-card strong {
+    position: relative;
+    z-index: 2;
+    font-size: 18px;
+    letter-spacing: -.03em;
+    color: var(--bone);
+    text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+  }
+
+  /* START / FOOTER CTA BACKGROUND */
+  #start {
+    background: 
+      linear-gradient(180deg, rgba(11,11,11,0.85) 0%, rgba(11,11,11,0.95) 100%),
+      url('https://images.unsplash.com/photo-1534367507873-d2d7e24c797f?auto=format&fit=crop&w=1920&q=80') center/cover fixed;
+  }
+
   .quote{
     padding:100px 0;
     text-align:center;
@@ -284,9 +340,9 @@
       <div class="kicker">01 / The idea</div>
       <div class="statement">The product is programming.<br><strong>The perceived product is identity.</strong></div>
     </div>
-    <h2>YOU DON'T<br>NEED MORE<br>TIME.</h2>
+    <h2 style="position:relative; z-index:2;">YOU DON'T<br>NEED MORE<br>TIME.</h2>
     <div style="height:42px"></div>
-    <p style="max-width:620px;color:#aaa79f;font-size:16px">Class. Work. Friends. Sleep. Training. BRN. is designed for the high-output student who wants capability without obsession — efficient, demanding sessions that fit the rest of life.</p>
+    <p style="max-width:620px;color:#aaa79f;font-size:16px; position:relative; z-index:2;">Class. Work. Friends. Sleep. Training. BRN. is designed for the high-output student who wants capability without obsession — efficient, demanding sessions that fit the rest of life.</p>
   </div>
 </section>
 
@@ -313,7 +369,6 @@
   </div>
 </section>
 
-<!-- ATHLETE PROOF & WORKOUT GALLERY SECTION -->
 <section class="section" id="proof">
   <div class="wrap">
     <div class="section-head">
@@ -382,16 +437,28 @@
       <h2>ATHLETE FIRST.<br>COLLEGE LIFE<br>INCLUDED.</h2>
     </div>
     <div class="culture">
-      <div><strong>TRAINING</strong></div>
-      <div><strong>EDUCATION</strong></div>
-      <div><strong>CULTURE</strong></div>
-      <div><strong>PEOPLE</strong></div>
+      <div class="culture-card">
+        <img src="https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&w=600&q=80" alt="Training">
+        <strong>TRAINING</strong>
+      </div>
+      <div class="culture-card">
+        <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=600&q=80" alt="Education">
+        <strong>EDUCATION</strong>
+      </div>
+      <div class="culture-card">
+        <img src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=600&q=80" alt="Culture">
+        <strong>CULTURE</strong>
+      </div>
+      <div class="culture-card">
+        <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=600&q=80" alt="People">
+        <strong>PEOPLE</strong>
+      </div>
     </div>
   </div>
 </section>
 
 <section class="section" id="start">
-  <div class="wrap" style="text-align:center">
+  <div class="wrap" style="text-align:center; position:relative; z-index:2;">
     <div class="kicker">06 / Start</div>
     <h2 style="margin:25px auto 35px;max-width:900px">TRAIN LIKE AN ATHLETE.<br>LIVE LIKE A STUDENT.</h2>
     <a class="cta" href="mailto:hello@brn.training">Join BRN. <span>→</span></a>
